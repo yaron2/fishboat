@@ -1,0 +1,20 @@
+body {
+    background-color: #000066;
+    color: white;
+}
+h1 {
+    margin: 15px;
+}
+.fb-item {
+
+}
+.fb-picture {
+    border-color: #00ccff;
+    border-style: solid;
+    border-width: 1px;
+    padding: 3px;
+    margin: 2px;
+}
+.fb-container {
+    padding: 3px;    
+}

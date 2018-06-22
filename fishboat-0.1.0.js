@@ -21,10 +21,14 @@ BootstrapFluidLayoutProvider.prototype = Object.create(LayoutProvider.prototype)
 BootstrapFluidLayoutProvider.prototype.constructor = BootstrapFluidLayoutProvider;
 
 BootstrapFluidLayoutProvider.prototype.add = function(bindable) {
-	var div = document.createElement('div');		
-	var width = 12 / ((this.element.childNodes.length+1) % 12);
+	var div = document.createElement('div');			
 	bindable.element = this.element.appendChild(div);		
-	this.element.childNodes.forEach(i=>i.className="col-sm-" + width);
+
+	//I used 11 instead 12 here because I found if I do, the fb-container class can't have any margins
+	//when two col-sm-6 items are used. Using 11 changes the classes to col-sm-5, which seems fit
+	//but of course less ideal.
+	var width = Math.floor(11 / (this.element.childNodes.length  % 12));
+	this.element.childNodes.forEach(i=>i.className ="fb-container col-sm-" + width);
 	return bindable;
 }
 
