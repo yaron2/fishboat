@@ -1,4 +1,4 @@
-#fishboat - Reusable JavaScript UI components with ease
+# fishboat - Reusable JavaScript UI components with ease
 
 I often need to build web-based demo scenarios and prototypes. And I’ve been using wonderful frameworks like [three.js]( https://threejs.org/), [d3.js]( https://d3js.org/), [babylon.js]( https://www.babylonjs.com/), [bootstrap]( http://getbootstrap.com/), [angularjs](https://angularjs.org/) and many others for various presentation needs. As I find myself repeating myself creating similar UIs, I decide to write a high-level library for myself (and whoever may need it) so that I can easily create typical data-bound UI components without needing to memorize all the framework details. 
 I call this library “fishboat”. It provides a simple and consistent programming model as well as an increasing number of pre-built UI components that you can easily drop into your page, bind live data to it and call it done. 
