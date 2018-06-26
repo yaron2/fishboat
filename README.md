@@ -20,9 +20,9 @@ Creating other UI components will follow the same steps:
 * Add UI component to it
 * Bind to a data source, which is usually a _fb.dataBuffer_.
 
-## Data Buffer
+## Data Source
 
-**fb.dataBuffer** is a wrapper around JavaScript objects. It provides data change notifications to bound UI components. In current version, you can create a buffer based on a JavaScript array. In later versions, you'll be able to bind to other data structures such as a scalar or a JSON object.
+**fb.dataSource** is a wrapper around JavaScript objects. It provides data change notifications to bound UI components. You can create a data source based on an array of objects or a single object. 
 
 ## UI Components
 
@@ -34,7 +34,7 @@ Creating other UI components will follow the same steps:
 | gallery       | displays all image URLs in the data buffer as  \<img/> tags with width of _m_.       |  fb.gallery(_m_)  |  |
 | *lineChart       | displays the data buffer as a line chart.       | fb.lineChart() | d3.js  |
 | logConsole    | displays all text lines in the data buffer. | fb.logConsole | |
-| *speedometer | displays a speedometer based on given scalar. |fb.speedometer()| d3.js |
+| gauge | displays a speedometer based on given scalar. |fb.gauge()| d3.js |
 
 
 

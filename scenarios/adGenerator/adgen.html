@@ -53,8 +53,8 @@
 			var shown = false;
 			var valeur = 0;
 			var bound = false;
-			var pictures = fb.dataBuffer(["../../b3.png", "../../b2.png", "../../b1.png"], 3)			
-			var pictures2 = fb.dataBuffer(["b3-2.png"], 1)		
+			var pictures = fb.dataSource(["../../b3.png", "../../b2.png", "../../b1.png"], 3)			
+			var pictures2 = fb.dataSource(["b3-2.png"], 1)		
 			function updateProgress() {
 				if (!shown) {
 					$('.progress-bar').css('width', valeur+'%').attr('aria-valuenow', valeur);  
