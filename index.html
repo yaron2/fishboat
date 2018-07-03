@@ -5,23 +5,41 @@
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 			<script src="fishboat-0.1.0.js"></script>
+			<script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
 			<link type="text/css" rel="stylesheet" href="fishboat-simple-0.1.0.css" />
 	</head>
 	<body>
 		<h1>Fishboat Demo</h1>
+		<div class="row">
+			<div class="col-md-3">
+				<h2>Log Console</h2>
+				<div id="console"></div>
+			</div>
+			<div class="col-md-3">
+				<h2>Gallery</h2>
+				<div id="gallery"></div>
+			</div>
+			<div class="col-md-3">
+				<h2>Gauge</h2>
+				<div id="gauge"></div>
+			</div>
+		</div>
 		<div id="stage"></div>
 		<script>
-			var logs = fb.dataSource([],13)			
-			var pictures = fb.dataSource(["b1.png", "b2.png", "b3.png"], 3)
+			var logs = fb.dataSource([],13);			
+			var pictures = fb.dataSource(["b1.png", "b2.png", "b3.png"], 3);
+			var reading = fb.dataSource(0,1);
 			$(function() {
-				
-				var stage = fb.select("stage");
-				stage.add(fb.logConsole()).bind(logs);											
-				stage.add(fb.gallery(300)).bind(pictures);
-
+				fb.select("console").add(fb.logConsole()).bind(logs);
+				fb.select("gallery").add(fb.gallery(300)).bind(pictures);
+				fb.select("gauge").add(fb.gauge()).bind(reading);
 				var i = 0;	
 				var pics = ["b1.png","b2.png", "b3.png"];
-				setInterval(function(){logs.push("This is log entry #" + (i++));pictures.push(pics[i%3]);}, 1000);
+				setInterval(function(){
+					logs.push("This is log entry #" + (i++));
+					pictures.push(pics[i%3]);
+					reading.set(Math.random() * 100+900);	
+				}, 100);
 			});
 		</script>
 	</body>
