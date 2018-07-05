@@ -174,6 +174,19 @@ Gauge.prototype.set = function(item) {
 	this.powerGauge.update(item);
 }
 
+//--------Label--------
+function Label(id) {
+	ItemPanel.call(this, new ItemSupplier((item, id) => {	
+		return '<span class="fb-label">' + item + '</span>';
+	}, id));
+}
+Label.prototype = Object.create(ItemPanel.prototype);
+Label.prototype.constructor = Label;
+Label.prototype.set = function(item) {
+	//TBD: Check this. This could be broken if a different layout provider is used.
+	this.element.firstChild.firstChild.innerHTML = item;
+}
+
 //--------Fishboat--------
 var FishBoat = function () {
 	this.currentItem = null;
@@ -192,6 +205,9 @@ var FishBoat = function () {
 	}
 	this.gauge = function() {
 		return new Gauge(this.currentItem.element.id);
+	}
+	this.label = function() {
+		return new Label(this.currentItem.element.id);
 	}
 }
 

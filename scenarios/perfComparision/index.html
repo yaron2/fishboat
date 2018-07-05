@@ -32,17 +32,31 @@
 				<div id="v2preview"></div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-3">				
+			</div>
+			<div class="col-md-3">
+				<div id="v1label"></div>
+			</div>
+			<div class="col-md-3">
+				<div id="v2label"></div>
+			</div>
+		</div>
 		<script>
 			var logs = fb.dataSource([],13);			
 			var v1thumbs = fb.dataSource([], 1);
 			var v2thumbs = fb.dataSource([], 1);
 			var v1reading = fb.dataSource(0,1);
 			var v2reading = fb.dataSource(0,1);
+			var v1label = fb.dataSource("",1);
+			var v2label = fb.dataSource("",1);
 			$(function() {
 				fb.select("v1preview").add(fb.gallery(300)).bind(v1thumbs);
 				fb.select("v2preview").add(fb.gallery(300)).bind(v2thumbs);
 				fb.select("v1speed").add(fb.gauge()).bind(v1reading);
 				fb.select("v2speed").add(fb.gauge()).bind(v2reading);
+				fb.select("v1label").add(fb.label()).bind(v1label);
+				fb.select("v2label").add(fb.label()).bind(v2label);
 				var i = 0;	
 				var pics = ["../../b1.png","../../b2.png", "../../b3.png"];
 				setInterval(function(){
@@ -50,6 +64,8 @@
 					v2thumbs.push(pics[i%3]);
 					v1reading.set(Math.random() * 100+300);	
 					v2reading.set(Math.random() * 100+900);	
+					v1label.set("He lala " + i);
+					v2label.set("Ba lala " + i);
 					i++;
 				}, 100);
 			});
