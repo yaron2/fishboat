@@ -1,76 +1,209 @@
-<html>
-	<head>
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-			<link type="text/css" rel="stylesheet" href="../../fishboat-simple-0.1.0.css" />
-	</head>
-	<body>
-		<h1>Performance Comparision</h1>
-		<div class="row">
-			<div class="col-md-3">				
-			</div>
-			<div class="col-md-3">
-				<h2>V1</h2>
-				<div id="v1speed"></div>
-			</div>
-			<div class="col-md-3">
-				<h2>V2</h2>
-				<div id="v2speed"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">				
-			</div>
-			<div class="col-md-3">
-				<div id="v1preview"></div>
-			</div>
-			<div class="col-md-3">
-				<div id="v2preview"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">				
-			</div>
-			<div class="col-md-3">
-				<div id="v1label"></div>
-			</div>
-			<div class="col-md-3">
-				<div id="v2label"></div>
-			</div>
-		</div>
+<!DOCTYPE html>
+<html lang="en">
 
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-			<script src="../../fishboat-0.1.0.js"></script>
-			<script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
-			
-		<script>
-			var logs = fb.dataSource([],13);			
-			var v1thumbs = fb.dataSource([], 1);
-			var v2thumbs = fb.dataSource([], 1);
-			var v1reading = fb.dataSource(0,1);
-			var v2reading = fb.dataSource(0,1);
-			var v1label = fb.dataSource("",1);
-			var v2label = fb.dataSource("",1);
-			$(function() {
-				fb.select("v1preview").add(fb.gallery(300)).bind(v1thumbs);
-				fb.select("v2preview").add(fb.gallery(300)).bind(v2thumbs);
-				fb.select("v1speed").add(fb.gauge()).bind(v1reading);
-				fb.select("v2speed").add(fb.gauge()).bind(v2reading);
-				fb.select("v1label").add(fb.label()).bind(v1label);
-				fb.select("v2label").add(fb.label()).bind(v2label);
-				var i = 0;	
-				var pics = ["../../b1.png","../../b2.png", "../../b3.png"];
-				setInterval(function(){
-					v1thumbs.push(pics[i%3]);
-					v2thumbs.push(pics[i%3]);
-					v1reading.set(Math.random() * 100+300);	
-					v2reading.set(Math.random() * 100+900);	
-					v1label.set("He lala " + i);
-					v2label.set("Ba lala " + i);
-					i++;
-				}, 100);
-			});
-		</script>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>ADLS Demo</title>
+	<!-- Bootstrap Core CSS -->
+	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- animation CSS -->
+	<link href="css/animate.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="css/style.css" rel="stylesheet">
+	<!-- color CSS -->
+	<link href="css/colors/default.css" id="theme" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="../../fishboat-simple-0.1.0.css" />
+</head>
+
+<body>
+	<!-- ============================================================== -->
+	<!-- Wrapper -->
+	<!-- ============================================================== -->
+	<div id="wrapper">
+		<!-- ============================================================== -->
+		<!-- Topbar header - style you can find in pages.scss -->
+		<!-- ============================================================== -->
+		<nav class="navbar navbar-default navbar-static-top m-b-0">
+			<div class="navbar-header">
+				<div class="top-left-part">
+					<!-- Logo -->
+					<a class="logo" href="index.html">
+						<!-- Logo icon image, you can use font-icon also -->
+						<b>
+							ADLS Demo
+						</b>
+					</a>
+				</div>
+				<!-- /Logo -->
+				<ul class="nav navbar-top-links navbar-right pull-right">
+					<li>
+						<form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+							<input type="text" placeholder="Search..." class="form-control">
+							<a href="">
+								<i class="fa fa-search"></i>
+							</a>
+						</form>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-header -->
+			<!-- /.navbar-top-links -->
+			<!-- /.navbar-static-side -->
+		</nav>
+		<!-- End Top Navigation -->
+		<!-- ============================================================== -->
+		<!-- Left Sidebar - style you can find in sidebar.scss  -->
+		<!-- ============================================================== -->
+		<div class="navbar-default sidebar" role="navigation">
+			<div class="sidebar-nav slimscrollsidebar">
+				<div class="sidebar-head">
+					<h3>
+						<span class="fa-fw open-close">
+							<i class="ti-close ti-menu"></i>
+						</span>
+						<span class="hide-menu">ADLS Demo</span>
+					</h3>
+				</div>
+				<ul class="nav" id="side-menu">
+					<li style="padding: 70px 0 0;">
+						<a href="index.html" class="waves-effect">
+							<i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Left Sidebar -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Page Content -->
+		<!-- ============================================================== -->
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row bg-title">
+					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						<h4 class="page-title">Dashboard</h4>
+					</div>
+				</div>
+
+				<div class="row text-center">
+					<h1>Performance Comparision (GB/s Ingestion Throughput)</h1>
+					<div class="row">
+						<div class="col-md-6">
+							<h2>V1</h2>
+							<div id="v1speed"></div>
+							<img style="width: 300px;" height="200px;" id="v1preview">
+						</div>
+						<div class="col-md-6">
+							<h2>V2</h2>
+							<div id="v2speed"></div>
+							<img style="width: 300px;" height="200px;" id="v2preview">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-lg-6 col-sm-6 col-xs-12">
+							<div class="white-box analytics-info">
+								<h3 class="box-title">V1</h3>
+								<ul class="list-inline two-part">
+									<li class="text-center">
+										<i class="ti-arrow-up text-success"></i>
+										<span class="counter text-success">
+											<div id="v1label"></div>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6 col-xs-12">
+							<div class="white-box analytics-info">
+								<h3 class="box-title">V2</h3>
+
+								<ul class="list-inline two-part">
+									<li class="text-center">
+										<i class="ti-arrow-up text-purple"></i>
+										<span class="counter text-purple">
+											<div id="v2label"></div>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+			<footer class="footer text-center"> 2018 &copy; Crush The Rebel Alliance </footer>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Page Content -->
+		<!-- ============================================================== -->
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="../../fishboat-0.1.0.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
+
+	<script>
+		var logs = fb.dataSource([], 13);
+		//var v1thumbs = fb.dataSource([], 1);
+		//var v2thumbs = fb.dataSource([], 1);
+		var v1reading = fb.dataSource(0, 1);
+		var v2reading = fb.dataSource(0, 1);
+		var v1label = fb.dataSource("", 1);
+		var v2label = fb.dataSource("", 1);
+		$(function () {
+			//fb.select("v1preview").add(fb.gallery(300)).bind(v1thumbs);
+			//fb.select("v2preview").add(fb.gallery(300)).bind(v2thumbs);
+			fb.select("v1speed").add(fb.gauge()).bind(v1reading);
+			fb.select("v2speed").add(fb.gauge()).bind(v2reading);
+			fb.select("v1label").add(fb.label()).bind(v1label);
+			fb.select("v2label").add(fb.label()).bind(v2label);
+			var i = 0;
+			var j = 0;
+
+			var v1pics = [];
+			var v2pics = [];
+
+			var baseUrl = "https://adlsgen2demoblob.blob.core.windows.net/cats-and-dogs/";
+
+			for (let p = 1; p <= 200; p++) {
+				v1pics.push(baseUrl + "Persian_" + p + ".jpg");
+			}
+
+			for (let p = 1; p <= 200; p++) {
+				v2pics.push(baseUrl + "British_Shorthair_" + p + ".jpg");
+			}
+
+			setInterval(function () {
+				$('#v2preview').attr("src", v2pics[Math.round(getRandomArbitrary(1, v2pics.length))]);
+				//v2thumbs.push();
+				v2reading.set(Math.random() * 100 + 430);
+				v2label.set("Image Count " + i);
+				i = i + 25;
+			}, 300);
+
+			setInterval(function () {
+				$('#v1preview').attr("src", v1pics[Math.round(getRandomArbitrary(1, v1pics.length))]);
+				//v1thumbs.push();
+				v1reading.set(Math.random() * 100 + 300);
+				v1label.set("Image Count " + j);
+				j++;
+			}, 400);
+		});
+
+		function getRandomArbitrary(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+	</script>
+</body>
+
 </html>

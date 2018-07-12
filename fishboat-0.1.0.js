@@ -159,9 +159,9 @@ function Gauge(id) {
 		this.powerGauge = gauge('#' + id, {
 			size: 300,
 			clipWidth: 300,
-			clipHeight: 300,
+			clipHeight: 200,
 			ringWidth: 60,
-			maxValue: 1000,
+			maxValue: 500,
 			transitionMs: 4000,
 		});
 		this.powerGauge.render();
